@@ -11,15 +11,12 @@ SLACK_FEEDBACK_CHANNEL = "feedbacks"
 def lambda_handler(event, context):
     try:
         slack_token = env.get("SLACK_TOKEN")
-        print(event)
         data = event.get("feedback")
-
-        print(data)
 
         message = data["message"]
         user = data["user"]
 
-        feedback_message = f"""App Feedback from {user}\n{message}"""
+        feedback_message = f"""App Feedback from {user}:\n{message}"""
 
         message_response = requests.post(
             SLACK_MESSAGE_URL,
@@ -31,8 +28,6 @@ def lambda_handler(event, context):
         )
 
         assert message_response.status_code == 200
-
-        print("done")
 
     except Exception as LOOKING_GLASS_EXCEPTION:
         print(LOOKING_GLASS_EXCEPTION)
