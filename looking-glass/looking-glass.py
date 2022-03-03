@@ -18,6 +18,7 @@ def get_feedback_channel(stage):
     else:
         return SLACK_FEEDBACK_CHANNEL_DEV
 
+
 def lambda_handler(event, context):
     try:
         slack_token = env.get("SLACK_TOKEN")
