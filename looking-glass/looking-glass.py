@@ -13,7 +13,8 @@ def lambda_handler(event, context):
         print("hello from looking glass!")
         print(event)
         print(context)
-
+        
+        print(env)
         slack_token = env.get("LOOKING_GLASS_SLACK_TOKEN")
         print(slack_token)
 
