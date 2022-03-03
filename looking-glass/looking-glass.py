@@ -10,13 +10,7 @@ SLACK_FEEDBACK_CHANNEL = "feedbacks"
 
 def lambda_handler(event, context):
     try:
-        print("hello from looking glass!")
-        print(event)
-        print(context)
-        
-        print(env)
-        slack_token = env.get("LOOKING_GLASS_SLACK_TOKEN")
-        print(slack_token)
+        slack_token = env.get("SLACK_TOKEN")
 
         feedback_message = "this is fake feedback pls disregard!"
 
