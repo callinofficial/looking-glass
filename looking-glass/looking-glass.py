@@ -11,19 +11,13 @@ SLACK_FEEDBACK_CHANNEL = "feedbacks"
 def lambda_handler(event, context):
     try:
         slack_token = env.get("SLACK_TOKEN")
-
-        data = json.loads(event.get("body"))
-
         print(event)
+        data = json.loads(event.get("feedback"))
+
         print(data)
 
-        if "feedback" not in data:
-            print("no feedback was provided")
-            return ""
-
-        feedback = data["feedback"]
-        message = feedback["message"]
-        user = feedback["user"]
+        message = data["message"]
+        user = data["user"]
 
         feedback_message = f"""App Feedback from {user}\n{message}"""
 
