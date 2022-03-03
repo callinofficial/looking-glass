@@ -12,7 +12,7 @@ def lambda_handler(event, context):
     try:
         slack_token = env.get("SLACK_TOKEN")
         print(event)
-        data = json.loads(event.get("feedback"))
+        data = event.get("feedback")
 
         print(data)
 
