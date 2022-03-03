@@ -12,7 +12,20 @@ def lambda_handler(event, context):
     try:
         slack_token = env.get("SLACK_TOKEN")
 
-        feedback_message = "this is fake feedback pls disregard!"
+        data = json.loads(event.get("body"))
+
+        print(event)
+        print(data)
+
+        if "feedback" not in data:
+            print("no feedback was provided")
+            return ""
+
+        feedback = data["feedback"]
+        message = feedback["message"]
+        user = feedback["user"]
+
+        feedback_message = f"""App Feedback from {user}\n{message}"""
 
         message_response = requests.post(
             SLACK_MESSAGE_URL,
