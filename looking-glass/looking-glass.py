@@ -8,10 +8,10 @@ SLACK_MESSAGE_URL = SLACK_API_URL + "chat.postMessage"
 SLACK_FEEDBACK_CHANNEL = "feedbacks"
 
 
-def lamdba_handler(payload, context):
+def lambda_handler(event, context):
     try:
         print("hello from looking glass!")
-        print(payload)
+        print(event)
         print(context)
 
         slack_token = env.get("LOOKING_GLASS_SLACK_TOKEN")
