@@ -1,5 +1,38 @@
 import json
+import requests
+
+from os import environ as env
+
+SLACK_API_URL = "https://slack.com/api/"
+SLACK_MESSAGE_URL = SLACK_API_URL + "chat.postMessage"
+SLACK_FEEDBACK_CHANNEL = "feedbacks"
 
 
 def lamdba_handler(payload, context):
-    return "Hello World!"
+    try:
+        print("hello from looking glass!")
+        print(payload)
+        print(context)
+
+        slack_token = env.get("LOOKING_GLASS_SLACK_TOKEN")
+        print(slack_token)
+
+        feedback_message = "this is fake feedback pls disregard!"
+
+        message_response = requests.post(
+            SLACK_MESSAGE_URL,
+            {
+                "token": slack_token,
+                "channel": SLACK_FEEDBACK_CHANNEL,
+                "text": feedback_message,
+            },
+        )
+
+        assert message_response.status_code == 200
+
+        print("done")
+
+    except Exception as LOOKING_GLASS_EXCEPTION:
+        print(LOOKING_GLASS_EXCEPTION)
+
+    return ""
