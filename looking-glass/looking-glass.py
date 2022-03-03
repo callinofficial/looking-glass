@@ -21,12 +21,9 @@ def get_feedback_channel(stage):
 
 def lambda_handler(event, context):
     try:
-        print(event)
         slack_token = env.get("SLACK_TOKEN")
         stage = event.get("stage")
         data = event.get("feedback")
-
-        print(stage)
 
         message = data["message"]
         user = data["user"]
