@@ -8,8 +8,8 @@ PRODUCTION = "prod"
 SLACK_API_URL = "https://slack.com/api/"
 SLACK_MESSAGE_URL = SLACK_API_URL + "chat.postMessage"
 
-SLACK_FEEDBACK_CHANNEL = "feedbacks"
-SLACK_FEEDBACK_CHANNEL_DEV = "dev-feedbacks"
+SLACK_FEEDBACK_CHANNEL = "user-feedback"
+SLACK_FEEDBACK_CHANNEL_DEV = "dev-user-feedback"
 
 
 def get_feedback_channel(stage):
