@@ -3,14 +3,25 @@ import requests
 
 from os import environ as env
 
+PRODUCTION = "prod"
+
 SLACK_API_URL = "https://slack.com/api/"
 SLACK_MESSAGE_URL = SLACK_API_URL + "chat.postMessage"
-SLACK_FEEDBACK_CHANNEL = "feedbacks"
 
+SLACK_FEEDBACK_CHANNEL = "feedbacks"
+SLACK_FEEDBACK_CHANNEL_DEV = "dev-feedbacks"
+
+
+def get_feedback_channel(stage):
+    if stage == PRODUCTION:
+        return SLACK_FEEDBACK_CHANNEL
+    else:
+        return SLACK_FEEDBACK_CHANNEL_DEV
 
 def lambda_handler(event, context):
     try:
         slack_token = env.get("SLACK_TOKEN")
+        stage = event.get("stage")
         data = event.get("feedback")
 
         message = data["message"]
@@ -22,7 +33,7 @@ def lambda_handler(event, context):
             SLACK_MESSAGE_URL,
             {
                 "token": slack_token,
-                "channel": SLACK_FEEDBACK_CHANNEL,
+                "channel": get_feedback_channel(stage),
                 "text": feedback_message,
             },
         )
