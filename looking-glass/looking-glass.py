@@ -24,11 +24,15 @@ def lambda_handler(event, context):
         slack_token = env.get("SLACK_TOKEN")
         stage = event.get("stage")
         data = event.get("feedback")
+        client = event.get("client")
 
         message = data["message"]
         user = data["user"]
 
-        feedback_message = f"""App Feedback from {user}:\n{message}"""
+        device = client["device"]
+        version = client["version"]
+
+        feedback_message = f"""App Feedback from {user}:\n{message}\n\nDevice: {device} Version: {version}"""
 
         message_response = requests.post(
             SLACK_MESSAGE_URL,
