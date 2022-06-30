@@ -32,7 +32,7 @@ def lambda_handler(event, context):
         device = client["device"]
         version = client["version"]
 
-        feedback_message = f"""App Feedback from <https://callin.com/user/{user}|{user}>:\n```{message}```\n_Device: *{device}* Version: *{version}*_"""
+        feedback_message = f"""App Feedback from <https://callin.retool.com/apps/6df733ec-f7c6-11ec-936f-dff295978d6d/Engineering/UserDataLookup#handle={user}|{user}>:\n```{message}```\n_Device: *{device}* Version: *{version}*_"""
 
         message_response = requests.post(
             SLACK_MESSAGE_URL,
